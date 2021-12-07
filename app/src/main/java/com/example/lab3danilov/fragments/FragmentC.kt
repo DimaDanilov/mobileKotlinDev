@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.lab3danilov.Communicator
 import com.example.lab3danilov.R
 import kotlinx.android.synthetic.main.fragment_a.view.*
+import kotlinx.android.synthetic.main.fragment_b.view.*
 import kotlinx.android.synthetic.main.fragment_c.view.*
 
 class FragmentС : Fragment() {
@@ -35,6 +36,8 @@ class FragmentС : Fragment() {
         view.BtnToFragmentA3.setOnClickListener {
             communicator.passDataToA("")
         }
+        view.DisButton3.isEnabled = false
+        view.DisButton3.isClickable = false
 
         //Кнопка влево
         view.BtnToFragmentB.setOnClickListener {

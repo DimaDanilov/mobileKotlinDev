@@ -54,6 +54,8 @@ class FragmentD : Fragment() {
                 )
             } }
         }
+        view.DisButton4.isEnabled = false
+        view.DisButton4.isClickable = false
 
         //Кнопка влево
         view.BtnToFragmentC.setOnClickListener {

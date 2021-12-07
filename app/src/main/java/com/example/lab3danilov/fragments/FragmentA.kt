@@ -21,6 +21,10 @@ class FragmentA : Fragment() {
 
         communicator = activity as Communicator
 
+        //Кнопка навигации наверху
+        view.DisButton1.isEnabled = false
+        view.DisButton1.isClickable = false
+
         //Кнопка направо
         view.sendBtn.setOnClickListener {
             communicator.passDataToB(view.messageInput.text.toString())
