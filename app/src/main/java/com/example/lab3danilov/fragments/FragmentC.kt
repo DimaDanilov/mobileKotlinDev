@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.lab3danilov.Communicator
 import com.example.lab3danilov.R
+import kotlinx.android.synthetic.main.fragment_a.view.*
 import kotlinx.android.synthetic.main.fragment_c.view.*
 
 class FragmentС : Fragment() {
@@ -27,6 +28,20 @@ class FragmentС : Fragment() {
         displayMessageA = arguments?.getString("messageA")
         displayMessageB = arguments?.getString("messageB")
 
+        //Кнопки в верхнем меню
+        view.BtnToFragmentB2.setOnClickListener {
+            displayMessageA?.let { it1 -> communicator.passDataToB(it1) }
+        }
+        view.BtnToFragmentA3.setOnClickListener {
+            communicator.passDataToA("")
+        }
+
+        //Кнопка влево
+        view.BtnToFragmentB.setOnClickListener {
+            displayMessageA?.let { it1 -> communicator.passDataToB(it1) }
+        }
+
+        //Кнопки арифметических операций
         view.plusBtn.setOnClickListener {
             displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
                 communicator.passDataCToD(it1,

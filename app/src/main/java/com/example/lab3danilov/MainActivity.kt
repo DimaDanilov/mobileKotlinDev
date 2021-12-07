@@ -14,9 +14,20 @@ class MainActivity : AppCompatActivity(), Communicator {
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragmentA).commit()
     }
 
-    override fun passDataAToB(editTextInput: String) {
+    override fun passDataToA(nullString: String) {
         val bundle = Bundle()
-        bundle.putString("messageA", editTextInput)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val fragmentA = FragmentA()
+        fragmentA.arguments = bundle
+
+        transaction.replace(R.id.fragmentContainer, fragmentA)
+        transaction.commit()
+    }
+
+    override fun passDataToB(textInputA: String) {
+        val bundle = Bundle()
+        bundle.putString("messageA", textInputA)
 
         val transaction = this.supportFragmentManager.beginTransaction()
         val fragmentB = FragmentB()
@@ -26,10 +37,10 @@ class MainActivity : AppCompatActivity(), Communicator {
         transaction.commit()
     }
 
-    override fun passDataBToC(editTextInputA: String, editTextInputB: String) {
+    override fun passDataToC(textInputA: String, textInputB: String) {
         val bundle = Bundle()
-        bundle.putString("messageA", editTextInputA)
-        bundle.putString("messageB", editTextInputB)
+        bundle.putString("messageA", textInputA)
+        bundle.putString("messageB", textInputB)
 
 
         val transaction = this.supportFragmentManager.beginTransaction()

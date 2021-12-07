@@ -21,8 +21,9 @@ class FragmentA : Fragment() {
 
         communicator = activity as Communicator
 
+        //Кнопка направо
         view.sendBtn.setOnClickListener {
-            communicator.passDataAToB(view.messageInput.text.toString())
+            communicator.passDataToB(view.messageInput.text.toString())
         }
         return view
     }

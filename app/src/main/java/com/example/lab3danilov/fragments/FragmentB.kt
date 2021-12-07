@@ -24,11 +24,23 @@ class FragmentB : Fragment() {
 
         communicator = activity as Communicator
 
+        //Кнопка налево
+        view.BtnToFragmentA.setOnClickListener {
+            communicator.passDataToA("")
+        }
+
+        //Кнопка направо
         view.sendBtn2.setOnClickListener {
             displayMessageA = arguments?.getString("messageA")
             var displayMessageB = view.messageInput2.text.toString()
-            displayMessageA?.let { it1 -> communicator.passDataBToC(it1,displayMessageB) }
+            displayMessageA?.let { it1 -> communicator.passDataToC(it1,displayMessageB) }
         }
+
+        //Кнопка навигации наверху
+        view.BtnToFragmentA2.setOnClickListener {
+            communicator.passDataToA("")
+        }
+
         return view
     }
 }

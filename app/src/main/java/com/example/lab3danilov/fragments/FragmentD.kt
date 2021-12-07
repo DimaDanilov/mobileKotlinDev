@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.lab3danilov.Communicator
 import com.example.lab3danilov.R
+import kotlinx.android.synthetic.main.fragment_c.view.*
 import kotlinx.android.synthetic.main.fragment_d.view.*
 
 class FragmentD : Fragment() {
+    private lateinit var communicator: Communicator
 
     var displayMessageA: String? = ""
     var displayMessageB: String? = ""
@@ -35,6 +38,31 @@ class FragmentD : Fragment() {
         if (displayMessageAction=="/")
             resultToPrint = displayMessageB?.toInt()?.let { displayMessageA?.toInt()?.div(it) }
 
+        communicator = activity as Communicator
+
+        //Кнопки в верхнем меню
+        view.BtnToFragmentA4.setOnClickListener {
+            communicator.passDataToA("")
+        }
+        view.BtnToFragmentB3.setOnClickListener {
+            displayMessageA?.let { it1 -> communicator.passDataToB(it1) }
+        }
+        view.BtnToFragmentC2.setOnClickListener {
+            displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
+                communicator.passDataToC(it1,
+                    it2
+                )
+            } }
+        }
+
+        //Кнопка влево
+        view.BtnToFragmentC.setOnClickListener {
+            displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
+                communicator.passDataToC(it1,
+                    it2
+                )
+            } }
+        }
 
         view.displayMessage.text = resultToPrint.toString()
 
