@@ -47,25 +47,25 @@ class FragmentС : Fragment() {
         //Кнопки арифметических операций
         view.plusBtn.setOnClickListener {
             displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
-                communicator.passDataCToD(it1,
+                communicator.passDataToD(it1,
                     it2, "+")
             } }
         }
         view.minusBtn.setOnClickListener {
             displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
-                communicator.passDataCToD(it1,
+                communicator.passDataToD(it1,
                     it2, "-")
             } }
         }
         view.multiplyBtn.setOnClickListener {
             displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
-                communicator.passDataCToD(it1,
+                communicator.passDataToD(it1,
                     it2, "*")
             } }
         }
         view.divideBtn.setOnClickListener {
             displayMessageA?.let { it1 -> displayMessageB?.let { it2 ->
-                communicator.passDataCToD(it1,
+                communicator.passDataToD(it1,
                     it2, "/")
             } }
         }

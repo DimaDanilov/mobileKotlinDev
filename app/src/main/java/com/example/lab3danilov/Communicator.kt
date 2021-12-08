@@ -5,6 +5,6 @@ interface Communicator {
     fun passDataToB(textInputA: String)
     fun passDataToC(textInputA: String, textInputB: String)
 
-    fun passDataCToD(editTextInputA: String, editTextInputB: String, action: String)
+    fun passDataToD(textInputA: String, textInputB: String, action: String)
 
 }

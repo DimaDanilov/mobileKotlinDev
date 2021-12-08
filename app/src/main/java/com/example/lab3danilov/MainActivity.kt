@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity(), Communicator {
         transaction.commit()
     }
 
-    override fun passDataCToD(editTextInputA: String, editTextInputB: String, action: String) {
+    override fun passDataToD(textInputA: String, textInputB: String, action: String) {
         val bundle = Bundle()
-        bundle.putString("messageA", editTextInputA)
-        bundle.putString("messageB", editTextInputB)
+        bundle.putString("messageA", textInputA)
+        bundle.putString("messageB", textInputB)
         bundle.putString("action", action)
 
 
