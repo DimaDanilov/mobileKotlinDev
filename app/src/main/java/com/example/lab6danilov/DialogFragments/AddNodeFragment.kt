@@ -1,4 +1,4 @@
-package com.example.lab6danilov.AddNodeFragment
+package com.example.lab6danilov.DialogFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +32,7 @@ class AddNodeFragment(viewModel: NodeViewModel):DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var rootView: View = inflater.inflate(R.layout.add_node_fragment, container, false)
+        var rootView: View = inflater.inflate(R.layout.dialog_add_node, container, false)
 
         //Layout init
         cancelButton = rootView.findViewById(R.id.addNodeCancelButton)

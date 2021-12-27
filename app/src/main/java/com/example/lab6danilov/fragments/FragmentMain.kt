@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.lab6danilov.AddNodeFragment.AddNodeFragment
+import com.example.lab6danilov.DialogFragments.AddNodeFragment
 import com.example.lab6danilov.Communicator
 import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
@@ -35,7 +35,7 @@ class FragmentMain(viewModel: NodeViewModel): Fragment() {
             val nodeValue = node.value.toString()
             textView.setText("id = " + nodeValue + " value = " + nodeValue)
             textView.setOnClickListener{
-                communicator.DrawFragment(FragmentSecondary(viewModel))
+                communicator.DrawFragment(FragmentSecondary(viewModel, nodeValue))
             }
 
             linearLayout?.addView(textView)
