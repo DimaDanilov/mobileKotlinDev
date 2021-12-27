@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModel
 import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class AddNoteFragment(viewModel: NodeViewModel):DialogFragment() {
+class AddNodeFragment(viewModel: NodeViewModel):DialogFragment() {
 
     //Layout init
     lateinit var cancelButton: Button
@@ -33,7 +32,7 @@ class AddNoteFragment(viewModel: NodeViewModel):DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var rootView: View = inflater.inflate(R.layout.add_note_fragment, container, false)
+        var rootView: View = inflater.inflate(R.layout.add_node_fragment, container, false)
 
         //Layout init
         cancelButton = rootView.findViewById(R.id.addNodeCancelButton)
