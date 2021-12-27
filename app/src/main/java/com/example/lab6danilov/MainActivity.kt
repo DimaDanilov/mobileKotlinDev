@@ -9,24 +9,21 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import com.example.lab6danilov.AddNodeFragment.AddNoteFragment
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 import com.example.lab6danilov.entities.NodeViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
-    //Для вставки в экран
+    //Layout init
     lateinit var context: Context
     var linearLayout: LinearLayout? = null
     lateinit var addButton: Button
 
-
-    private fun insertNodeInDB(viewModel:NodeViewModel, value:Int, nodesList:MutableList<Node>){
-        val nodeToInsert = Node(value, nodesList)
-        viewModel.insertNode(nodeToInsert)
-    }
-
+    //Display nodes on screen
     private fun drawNodes(nodesList:MutableList<Node>, linearLayout: LinearLayout?){
+
         //Clear layout from previous results
         linearLayout?.removeAllViews();
 
@@ -54,14 +51,15 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = NodeViewModelFactory(application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(NodeViewModel::class.java)
 
+        //When List will change, nodes should be redrawed on screen
         viewModel.getAllNodes.observe(this) { nodes ->
             drawNodes(nodes, linearLayout)
         }
 
+        //Button Listener to add new nodes
         addButton.setOnClickListener{
-            insertNodeInDB(viewModel, 5, mutableListOf())
-            insertNodeInDB(viewModel, 6, mutableListOf())
-            insertNodeInDB(viewModel, 7, mutableListOf())
+            var addNodeFrag = AddNoteFragment(viewModel)
+            addNodeFrag.show(supportFragmentManager, "NoteFragment")
         }
 
     }
