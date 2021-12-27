@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
 class NodeViewModelFactory(private var application: Application):ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NodeViewModel::class.java)){
             return NodeViewModel(application) as T
         }

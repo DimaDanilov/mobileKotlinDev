@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.LiveData
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     //Для вставки в экран
     lateinit var context: Context
     var linearLayout: LinearLayout? = null
+    lateinit var addButton: Button
 
 
     private fun insertNodeInDB(viewModel:NodeViewModel, value:Int, nodesList:MutableList<Node>){
@@ -46,17 +48,21 @@ class MainActivity : AppCompatActivity() {
         //Layout init
         linearLayout = findViewById(R.id.nodesContainer)
         context = this
+        addButton = findViewById(R.id.addButton)
 
         //viewModel init
         val viewModelFactory = NodeViewModelFactory(application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(NodeViewModel::class.java)
 
-        insertNodeInDB(viewModel, 4, mutableListOf())
-
         viewModel.getAllNodes.observe(this) { nodes ->
             drawNodes(nodes, linearLayout)
         }
 
+        addButton.setOnClickListener{
+            insertNodeInDB(viewModel, 5, mutableListOf())
+            insertNodeInDB(viewModel, 6, mutableListOf())
+            insertNodeInDB(viewModel, 7, mutableListOf())
+        }
 
     }
 }
