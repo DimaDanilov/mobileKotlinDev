@@ -25,4 +25,10 @@ class NodeViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun updateNode(value: Int, nodes: MutableList<Node>){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateNode(value, nodes)
+        }
+    }
+
 }

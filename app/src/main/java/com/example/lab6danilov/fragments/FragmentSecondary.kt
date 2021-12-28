@@ -17,10 +17,10 @@ import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class FragmentSecondary(viewModel: NodeViewModel, nodeCheck: String): Fragment() {
+class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node): Fragment() {
     private lateinit var communicator: Communicator
     var viewModel = viewModel
-    var nodeCheck = nodeCheck
+    var nodeFirst = nodeFirst
 
     //Buttons
     var isParentSelected: Boolean = false
@@ -38,16 +38,17 @@ class FragmentSecondary(viewModel: NodeViewModel, nodeCheck: String): Fragment()
         var fragmentManager = (activity as FragmentActivity).supportFragmentManager
 
         //Draw every node
-        for (node in nodesList){
-            val nodeValue = node.value.toString()
+        for (nodeSecond in nodesList){
+            val nodeValue = nodeSecond.value.toString()
+            val nodeFirstValue = nodeFirst.value.toString()
 
             //Проверка на совпадение нодов(2 и 2 не должны показываться)
-            if (nodeValue!=nodeCheck){
+            if (nodeValue!=nodeFirst.value.toString()){
                 val textView = TextView(context)
 
-                textView.text = "id: $nodeCheck | value = $nodeCheck − id: $nodeValue | value = $nodeValue"
+                textView.text = "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeValue | value = $nodeValue"
                 textView.setOnClickListener{
-                    var addRelationFrag = AddRelationFragment(viewModel, isParentSelected)
+                    var addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
                     addRelationFrag.show(fragmentManager, "NoteFragment")
                 }
 

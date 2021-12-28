@@ -7,20 +7,33 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.example.lab6danilov.R
+import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class AddRelationFragment(viewModel: NodeViewModel, isParent: Boolean):DialogFragment() {
+class AddRelationFragment(viewModel: NodeViewModel, nodeFirst:Node, nodeSecond:Node, isParent: Boolean):DialogFragment() {
 
     //Layout init
     var isParent = isParent
     lateinit var cancelButton: Button
     lateinit var addRelationButton: Button
     var viewModel = viewModel
+    var nodeSecond=nodeSecond
+    var nodeFirst = nodeFirst
 
     private fun makeRelation(isParent: Boolean){
         when(isParent) {
-            true -> {println("Parent"+isParent.toString())}
-            false -> {println("Child"+isParent.toString())}
+            true -> {
+                viewModel.updateNode(
+                    nodeSecond.value,
+                    (nodeSecond.nodes + mutableListOf(Node(nodeFirst.value, nodeFirst.nodes))) as MutableList<Node>
+                )
+            }
+            false -> {
+                viewModel.updateNode(
+                    nodeFirst.value,
+                    (nodeFirst.nodes + mutableListOf(Node(nodeSecond.value, nodeSecond.nodes))) as MutableList<Node>
+                )
+            }
         }
     }
 

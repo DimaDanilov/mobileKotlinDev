@@ -35,7 +35,7 @@ class FragmentMain(viewModel: NodeViewModel): Fragment() {
             val nodeValue = node.value.toString()
             textView.setText("id = " + nodeValue + " value = " + nodeValue)
             textView.setOnClickListener{
-                communicator.DrawFragment(FragmentSecondary(viewModel, nodeValue))
+                communicator.DrawFragment(FragmentSecondary(viewModel, node))
             }
 
             linearLayout?.addView(textView)
