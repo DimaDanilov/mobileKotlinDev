@@ -9,33 +9,32 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.lab6danilov.DialogFragments.AddNodeFragment
+import com.example.lab6danilov.dialogFragments.AddNodeFragment
 import com.example.lab6danilov.Communicator
 import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class FragmentMain(viewModel: NodeViewModel): Fragment() {
+class FragmentMain(private var viewModel: NodeViewModel): Fragment() {
     private lateinit var communicator: Communicator
-    var viewModel = viewModel
 
     //Layout init
-    var linearLayout: LinearLayout? = null
-    lateinit var addButton: Button
+    private var linearLayout: LinearLayout? = null
+    private lateinit var addButton: Button
 
     //Display nodes on screen
     private fun drawNodes(nodesList:MutableList<Node>, linearLayout: LinearLayout?){
         //Clear layout from previous results
-        linearLayout?.removeAllViews();
+        linearLayout?.removeAllViews()
 
         //Draw every node
         for (node in nodesList){
             val textView = TextView(context)
 
             val nodeValue = node.value.toString()
-            textView.setText("id = " + nodeValue + " value = " + nodeValue)
+            "id: $nodeValue | value: $nodeValue".also { textView.text = it }
             textView.setOnClickListener{
-                communicator.DrawFragment(FragmentSecondary(viewModel, node, false))
+                communicator.drawFragment(FragmentSecondary(viewModel, node, false))
             }
 
             linearLayout?.addView(textView)
@@ -48,7 +47,7 @@ class FragmentMain(viewModel: NodeViewModel): Fragment() {
     ): View?{
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-        var fragmentManager = (activity as FragmentActivity).supportFragmentManager
+        val fragmentManager = (activity as FragmentActivity).supportFragmentManager
         communicator = activity as Communicator
 
         //Layout init
@@ -56,14 +55,14 @@ class FragmentMain(viewModel: NodeViewModel): Fragment() {
         addButton = view.findViewById(R.id.addButton)
 
 
-        //When List will change, nodes should be redrawed on screen
+        //When List will change, nodes should be redrawn on screen
         viewModel.getAllNodes.observe(this) { nodes ->
             drawNodes(nodes, linearLayout)
         }
 
         //Button Listener to add new nodes
         addButton.setOnClickListener{
-            var addNodeFrag = AddNodeFragment(viewModel)
+            val addNodeFrag = AddNodeFragment(viewModel)
             addNodeFrag.show(fragmentManager, "NoteFragment")
         }
         return view

@@ -11,49 +11,61 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.lab6danilov.Communicator
-import com.example.lab6danilov.DialogFragments.AddNodeFragment
-import com.example.lab6danilov.DialogFragments.AddRelationFragment
+import com.example.lab6danilov.dialogFragments.AddRelationFragment
 import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node, isParentSelected: Boolean): Fragment() {
+class FragmentSecondary(private var viewModel: NodeViewModel, private var nodeFirst: Node,
+    private var isParentSelected: Boolean): Fragment() {
+
     private lateinit var communicator: Communicator
-    var viewModel = viewModel
-    var nodeFirst = nodeFirst
-
-    //Buttons
-    var isParentSelected = isParentSelected
-    lateinit var parentButton: Button
-    lateinit var childButton: Button
-
 
     //Layout init
-    var linearLayout: LinearLayout? = null
+    private var linearLayout: LinearLayout? = null
+    private lateinit var parentButton: Button
+    private lateinit var childButton: Button
 
     //Display nodes on screen
     private fun drawNodes(nodesList:MutableList<Node>, linearLayout: LinearLayout?){
+
+        fun valueOfNodeContainsInNodesOf(nodeValue: Node, nodeNodes: Node, isContaining:Boolean): Boolean {
+            return if (isContaining)
+                nodeValue.value in nodeNodes.nodes.map { it.value }
+            else
+                nodeValue.value !in nodeNodes.nodes.map { it.value }
+        }
+
         //Clear layout from previous results
-        linearLayout?.removeAllViews();
-        var fragmentManager = (activity as FragmentActivity).supportFragmentManager
+        linearLayout?.removeAllViews()
+        val fragmentManager = (activity as FragmentActivity).supportFragmentManager
 
         //Draw every node
         for (nodeSecond in nodesList){
             val nodeSecondValue = nodeSecond.value.toString()
             val nodeFirstValue = nodeFirst.value.toString()
 
-            //Проверка на совпадение нодов(2 и 2 не должны показываться)
+            //Check if nodes are the same(2 - 2 must not be shown)
             if (nodeSecondValue!=nodeFirst.value.toString()){
 
-                //Фильтр на невозможные связи
-                if (((nodeFirst.value !in nodeSecond.nodes.map { it.value })&&(isParentSelected==true))||
-                    ((nodeSecond.value !in nodeFirst.nodes.map { it.value })&&(isParentSelected==false))){
+                //Filter if connections are impossible
+                if ((valueOfNodeContainsInNodesOf(nodeFirst, nodeSecond, false) && isParentSelected) ||
+                    (valueOfNodeContainsInNodesOf(nodeSecond, nodeFirst, false) && !isParentSelected)){
 
                     val textView = TextView(context)
 
-                    textView.text = "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeSecondValue | value = $nodeSecondValue"
+                    //If connection exists make it green
+                    if ((valueOfNodeContainsInNodesOf(nodeSecond, nodeFirst, true) && isParentSelected) ||
+                        (valueOfNodeContainsInNodesOf(nodeFirst, nodeSecond, true) && !isParentSelected)){
+                        textView.setBackgroundColor(0xFF0FFF0F.toInt())
+                    } else
+                        textView.setBackgroundColor(0xFFFFFFFF.toInt())
+
+
+
+                    "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeSecondValue | value = $nodeSecondValue".also { textView.text = it }
                     textView.setOnClickListener{
-                        var addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
+                        val addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
                         addRelationFrag.show(fragmentManager, "NoteFragment")
                     }
 
@@ -77,25 +89,25 @@ class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node, isParentSelec
         linearLayout = view.findViewById(R.id.nodesContainer)
 
 
-        //When List will change, nodes should be redrawed on screen
+        //When List will change, nodes should be redrawn on screen
         viewModel.getAllNodes.observe(this) { nodes ->
             drawNodes(nodes, linearLayout)
         }
 
         //Back Button return to 1st Fragment
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            communicator.DrawFragment(FragmentMain(viewModel))
+            communicator.drawFragment(FragmentMain(viewModel))
         }
 
 
         parentButton = view.findViewById(R.id.parentButton)
         parentButton.setOnClickListener{
-            communicator.DrawFragment(FragmentSecondary(viewModel, nodeFirst, true))
+            communicator.drawFragment(FragmentSecondary(viewModel, nodeFirst, true))
         }
 
         childButton = view.findViewById(R.id.childButton)
         childButton.setOnClickListener{
-            communicator.DrawFragment(FragmentSecondary(viewModel, nodeFirst, false))
+            communicator.drawFragment(FragmentSecondary(viewModel, nodeFirst, false))
         }
 
 

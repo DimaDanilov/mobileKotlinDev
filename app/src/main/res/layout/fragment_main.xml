@@ -24,8 +24,8 @@
         android:layout_height="50dp"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="30dp"
-        android:textSize="17dp"
-        android:text="+"
+        android:textSize="17sp"
+        android:text="@string/plusChar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

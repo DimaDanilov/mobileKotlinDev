@@ -1,4 +1,4 @@
-package com.example.lab6danilov.DialogFragments
+package com.example.lab6danilov.dialogFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +10,13 @@ import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class AddRelationFragment(viewModel: NodeViewModel, nodeFirst:Node, nodeSecond:Node, isParent: Boolean):DialogFragment() {
+class AddRelationFragment(
+    private var viewModel: NodeViewModel, private var nodeFirst:Node,
+    private var nodeSecond:Node, private var isParent: Boolean):DialogFragment() {
 
     //Layout init
-    var isParent = isParent
-    lateinit var cancelButton: Button
-    lateinit var addRelationButton: Button
-    var viewModel = viewModel
-    var nodeSecond=nodeSecond
-    var nodeFirst = nodeFirst
+    private lateinit var cancelButton: Button
+    private lateinit var addRelationButton: Button
 
     private fun makeRelation(isParent: Boolean){
         when(isParent) {
@@ -41,8 +39,8 @@ class AddRelationFragment(viewModel: NodeViewModel, nodeFirst:Node, nodeSecond:N
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var rootView: View = inflater.inflate(R.layout.dialog_add_relation, container, false)
+    ): View {
+        val rootView: View = inflater.inflate(R.layout.dialog_add_relation, container, false)
 
         //Layout init
         cancelButton = rootView.findViewById(R.id.addRelationCancelButton)

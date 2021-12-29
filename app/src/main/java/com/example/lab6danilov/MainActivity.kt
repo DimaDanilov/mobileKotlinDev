@@ -16,13 +16,13 @@ class MainActivity : AppCompatActivity(), Communicator {
 
         //viewModel init
         val viewModelFactory = NodeViewModelFactory(application)
-        var viewModel = ViewModelProvider(this, viewModelFactory).get(NodeViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[NodeViewModel::class.java]
 
         val fragmentMain = FragmentMain(viewModel)
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragmentMain).commit()
     }
 
-    override fun DrawFragment(fragmentToDraw: Fragment) {
+    override fun drawFragment(fragmentToDraw: Fragment) {
         val bundle = Bundle()
 
         val transaction = this.supportFragmentManager.beginTransaction()

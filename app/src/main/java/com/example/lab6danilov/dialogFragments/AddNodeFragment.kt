@@ -1,4 +1,4 @@
-package com.example.lab6danilov.DialogFragments
+package com.example.lab6danilov.dialogFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,13 @@ import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class AddNodeFragment(viewModel: NodeViewModel):DialogFragment() {
+class AddNodeFragment(private var viewModel: NodeViewModel):DialogFragment() {
 
     //Layout init
-    lateinit var cancelButton: Button
-    lateinit var addNodeButton: Button
-    lateinit var nodeValueField: EditText
-    var nodeValueToAdd: Int? = null
-    var viewModel = viewModel
+    private lateinit var cancelButton: Button
+    private lateinit var addNodeButton: Button
+    private lateinit var nodeValueField: EditText
+    private var nodeValueToAdd: Int? = null
 
 
     private fun insertNodeInDB(viewModel: NodeViewModel, value:Int, nodesList:MutableList<Node>){
@@ -31,8 +30,8 @@ class AddNodeFragment(viewModel: NodeViewModel):DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var rootView: View = inflater.inflate(R.layout.dialog_add_node, container, false)
+    ): View {
+        val rootView: View = inflater.inflate(R.layout.dialog_add_node, container, false)
 
         //Layout init
         cancelButton = rootView.findViewById(R.id.addNodeCancelButton)
