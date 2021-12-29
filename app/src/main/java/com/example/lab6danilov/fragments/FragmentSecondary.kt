@@ -17,13 +17,13 @@ import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
 
-class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node): Fragment() {
+class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node, isParentSelected: Boolean): Fragment() {
     private lateinit var communicator: Communicator
     var viewModel = viewModel
     var nodeFirst = nodeFirst
 
     //Buttons
-    var isParentSelected: Boolean = false
+    var isParentSelected = isParentSelected
     lateinit var parentButton: Button
     lateinit var childButton: Button
 
@@ -39,20 +39,26 @@ class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node): Fragment() {
 
         //Draw every node
         for (nodeSecond in nodesList){
-            val nodeValue = nodeSecond.value.toString()
+            val nodeSecondValue = nodeSecond.value.toString()
             val nodeFirstValue = nodeFirst.value.toString()
 
             //Проверка на совпадение нодов(2 и 2 не должны показываться)
-            if (nodeValue!=nodeFirst.value.toString()){
-                val textView = TextView(context)
+            if (nodeSecondValue!=nodeFirst.value.toString()){
 
-                textView.text = "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeValue | value = $nodeValue"
-                textView.setOnClickListener{
-                    var addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
-                    addRelationFrag.show(fragmentManager, "NoteFragment")
+                //Фильтр на невозможные связи
+                if (((nodeFirst.value !in nodeSecond.nodes.map { it.value })&&(isParentSelected==true))||
+                    ((nodeSecond.value !in nodeFirst.nodes.map { it.value })&&(isParentSelected==false))){
+
+                    val textView = TextView(context)
+
+                    textView.text = "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeSecondValue | value = $nodeSecondValue"
+                    textView.setOnClickListener{
+                        var addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
+                        addRelationFrag.show(fragmentManager, "NoteFragment")
+                    }
+
+                    linearLayout?.addView(textView)
                 }
-
-                linearLayout?.addView(textView)
             }
 
         }
@@ -84,12 +90,12 @@ class FragmentSecondary(viewModel: NodeViewModel, nodeFirst: Node): Fragment() {
 
         parentButton = view.findViewById(R.id.parentButton)
         parentButton.setOnClickListener{
-            isParentSelected = true
+            communicator.DrawFragment(FragmentSecondary(viewModel, nodeFirst, true))
         }
 
         childButton = view.findViewById(R.id.childButton)
         childButton.setOnClickListener{
-            isParentSelected = false
+            communicator.DrawFragment(FragmentSecondary(viewModel, nodeFirst, false))
         }
 
 
