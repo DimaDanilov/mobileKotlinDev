@@ -14,6 +14,7 @@ import com.example.lab6danilov.Communicator
 import com.example.lab6danilov.R
 import com.example.lab6danilov.entities.Node
 import com.example.lab6danilov.entities.NodeViewModel
+import com.example.lab6danilov.fragments.colors.chooseColorForMain
 
 class FragmentMain(private var viewModel: NodeViewModel): Fragment() {
     private lateinit var communicator: Communicator
@@ -36,6 +37,9 @@ class FragmentMain(private var viewModel: NodeViewModel): Fragment() {
             textView.setOnClickListener{
                 communicator.drawFragment(FragmentSecondary(viewModel, node, false))
             }
+
+            //Color-setting
+            textView.setBackgroundColor(chooseColorForMain(node, nodesList))
 
             linearLayout?.addView(textView)
         }
