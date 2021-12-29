@@ -1,4 +1,7 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database.repositories
+
+import com.example.lab6danilov.database.entities.Node
+import com.example.lab6danilov.database.entities.NodeDao
 
 class NodeRepository(private val nodeDao: NodeDao) {
 

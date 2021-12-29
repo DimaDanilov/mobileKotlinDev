@@ -1,4 +1,4 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

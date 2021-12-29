@@ -1,4 +1,4 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

@@ -9,11 +9,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.lab6danilov.dialogFragments.AddNodeFragment
+import com.example.lab6danilov.fragments.dialogFragments.AddNodeFragment
 import com.example.lab6danilov.Communicator
 import com.example.lab6danilov.R
-import com.example.lab6danilov.entities.Node
-import com.example.lab6danilov.entities.NodeViewModel
+import com.example.lab6danilov.database.entities.Node
+import com.example.lab6danilov.database.viewmodels.NodeViewModel
 import com.example.lab6danilov.fragments.colors.chooseColorForMain
 
 class FragmentMain(private var viewModel: NodeViewModel): Fragment() {

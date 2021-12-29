@@ -1,9 +1,10 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database.entities
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.lab6danilov.database.entities.Node
 import kotlinx.coroutines.flow.Flow
 
 @Dao

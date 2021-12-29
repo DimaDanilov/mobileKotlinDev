@@ -1,4 +1,4 @@
-package com.example.lab6danilov.dialogFragments
+package com.example.lab6danilov.fragments.dialogFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.example.lab6danilov.R
-import com.example.lab6danilov.entities.Node
-import com.example.lab6danilov.entities.NodeViewModel
+import com.example.lab6danilov.database.entities.Node
+import com.example.lab6danilov.database.viewmodels.NodeViewModel
 
 class AddNodeFragment(private var viewModel: NodeViewModel):DialogFragment() {
 

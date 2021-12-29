@@ -11,13 +11,13 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.lab6danilov.Communicator
-import com.example.lab6danilov.dialogFragments.AddRelationFragment
+import com.example.lab6danilov.fragments.dialogFragments.AddRelationFragment
 import com.example.lab6danilov.R
-import com.example.lab6danilov.entities.Node
-import com.example.lab6danilov.entities.NodeViewModel
+import com.example.lab6danilov.database.entities.Node
+import com.example.lab6danilov.database.viewmodels.NodeViewModel
 
 class FragmentSecondary(private var viewModel: NodeViewModel, private var nodeFirst: Node,
-    private var isParentSelected: Boolean): Fragment() {
+                        private var isParentSelected: Boolean): Fragment() {
 
     private lateinit var communicator: Communicator
 

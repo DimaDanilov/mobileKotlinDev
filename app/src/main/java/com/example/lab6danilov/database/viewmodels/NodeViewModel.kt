@@ -1,10 +1,13 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.lab6danilov.database.databases.NodeDatabase
+import com.example.lab6danilov.database.entities.Node
+import com.example.lab6danilov.database.repositories.NodeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

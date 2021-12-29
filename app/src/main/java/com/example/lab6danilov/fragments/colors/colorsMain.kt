@@ -1,6 +1,6 @@
 package com.example.lab6danilov.fragments.colors
 
-import com.example.lab6danilov.entities.Node
+import com.example.lab6danilov.database.entities.Node
 
 fun chooseColorForMain(node: Node, nodesList: MutableList<Node>): Int {
     fun hasChild(node: Node, nodesList: MutableList<Node>): Boolean {

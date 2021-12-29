@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.lab6danilov.entities.NodeViewModel
-import com.example.lab6danilov.entities.NodeViewModelFactory
+import com.example.lab6danilov.database.viewmodels.NodeViewModel
+import com.example.lab6danilov.database.viewmodels.NodeViewModelFactory
 import com.example.lab6danilov.fragments.*
 
 class MainActivity : AppCompatActivity(), Communicator {

@@ -1,6 +1,7 @@
-package com.example.lab6danilov.entities
+package com.example.lab6danilov.database
 
 import androidx.room.TypeConverter
+import com.example.lab6danilov.database.entities.Node
 import com.google.gson.Gson
 
 class Converters {
