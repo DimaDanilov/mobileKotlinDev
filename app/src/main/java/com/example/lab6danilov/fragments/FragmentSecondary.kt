@@ -15,6 +15,7 @@ import com.example.lab6danilov.fragments.dialogFragments.AddRelationFragment
 import com.example.lab6danilov.R
 import com.example.lab6danilov.database.entities.Node
 import com.example.lab6danilov.database.viewmodels.NodeViewModel
+import com.example.lab6danilov.fragments.dialogFragments.DeleteRelationFragment
 
 class FragmentSecondary(private var viewModel: NodeViewModel, private var nodeFirst: Node,
                         private var isParentSelected: Boolean): Fragment() {
@@ -36,6 +37,8 @@ class FragmentSecondary(private var viewModel: NodeViewModel, private var nodeFi
                 nodeValue.value !in nodeNodes.nodes.map { it.value }
         }
 
+        println(nodesList)
+
         //Clear layout from previous results
         linearLayout?.removeAllViews()
         val fragmentManager = (activity as FragmentActivity).supportFragmentManager
@@ -54,20 +57,23 @@ class FragmentSecondary(private var viewModel: NodeViewModel, private var nodeFi
 
                     val textView = TextView(context)
 
-                    //If connection exists make it green
+                    //If connection exists make it green and add listener
                     if ((valueOfNodeContainsInNodesOf(nodeSecond, nodeFirst, true) && isParentSelected) ||
                         (valueOfNodeContainsInNodesOf(nodeFirst, nodeSecond, true) && !isParentSelected)){
                         textView.setBackgroundColor(0xFF0FFF0F.toInt())
-                    } else
+                        textView.setOnClickListener{
+                            val deleteRelationFrag = DeleteRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
+                            deleteRelationFrag.show(fragmentManager, "DeleteFragment")
+                        }
+                    } else{
                         textView.setBackgroundColor(0xFFFFFFFF.toInt())
-
-
+                        textView.setOnClickListener{
+                            val addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
+                            addRelationFrag.show(fragmentManager, "AddFragment")
+                        }
+                    }
 
                     "id: $nodeFirstValue | value = $nodeFirstValue − id: $nodeSecondValue | value = $nodeSecondValue".also { textView.text = it }
-                    textView.setOnClickListener{
-                        val addRelationFrag = AddRelationFragment(viewModel, nodeFirst, nodeSecond, isParentSelected)
-                        addRelationFrag.show(fragmentManager, "NoteFragment")
-                    }
 
                     linearLayout?.addView(textView)
                 }

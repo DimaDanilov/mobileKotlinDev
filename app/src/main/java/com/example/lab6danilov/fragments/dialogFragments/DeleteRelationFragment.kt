@@ -10,23 +10,23 @@ import com.example.lab6danilov.R
 import com.example.lab6danilov.database.entities.Node
 import com.example.lab6danilov.database.viewmodels.NodeViewModel
 
-class AddRelationFragment(
+class DeleteRelationFragment(
     private var viewModel: NodeViewModel, private var nodeFirst: Node,
     private var nodeSecond: Node, private var isParent: Boolean):DialogFragment() {
 
     //Layout init
     private lateinit var cancelButton: Button
-    private lateinit var addRelationButton: Button
+    private lateinit var deleteRelationButton: Button
 
-    private fun makeRelation(isParent: Boolean){
+    private fun deleteRelation(isParent: Boolean){
         when(isParent) {
             true -> viewModel.updateNode(
-                nodeSecond.value,
-                (nodeSecond.nodes + mutableListOf(Node(nodeFirst.value, nodeFirst.nodes))) as MutableList<Node>
+                nodeFirst.value,
+                nodeFirst.nodes.filter { it.value!=nodeSecond.value } as MutableList<Node>
             )
             false -> viewModel.updateNode(
-                nodeFirst.value,
-                (nodeFirst.nodes + mutableListOf(Node(nodeSecond.value, nodeSecond.nodes))) as MutableList<Node>
+                nodeSecond.value,
+                nodeSecond.nodes.filter { it.value!=nodeFirst.value } as MutableList<Node>
             )
         }
     }
@@ -36,18 +36,18 @@ class AddRelationFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.dialog_add_relation, container, false)
+        val rootView: View = inflater.inflate(R.layout.dialog_delete_relation, container, false)
 
         //Layout init
-        cancelButton = rootView.findViewById(R.id.addRelationCancelButton)
-        addRelationButton = rootView.findViewById(R.id.addRelationApproveButton)
+        cancelButton = rootView.findViewById(R.id.deleteRelationCancelButton)
+        deleteRelationButton = rootView.findViewById(R.id.deleteRelationApproveButton)
 
         //Button listeners
         cancelButton.setOnClickListener{
             dismiss()
         }
-        addRelationButton.setOnClickListener{
-            makeRelation(isParent)
+        deleteRelationButton.setOnClickListener{
+            deleteRelation(isParent)
             dismiss()
         }
 

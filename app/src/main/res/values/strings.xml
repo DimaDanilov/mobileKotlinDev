@@ -9,4 +9,5 @@
     <string name="add_node">Add Node</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
+    <string name="delete_relation">Delete Relation?</string>
 </resources>
